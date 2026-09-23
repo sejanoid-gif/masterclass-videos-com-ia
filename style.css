@@ -364,7 +364,7 @@ use { pointer-events: none; }
 .app__main {
   position: relative; overflow: hidden;
   border-radius: 18px;
-  background: #F2F5FF;
+  background: #F2EDE2;
   display: grid; place-items: center;
 }
 .app__mesh {
@@ -1904,13 +1904,13 @@ img.mod__cover {
   content: ""; position: absolute; z-index: -1;
   top: 50%; left: 50%; width: 118%; aspect-ratio: 1;
   transform: translate(-50%, -50%) rotate(0deg);
-  background-color: #F2F4FF;
+  background-color: #F2EDE2;
   background-image:
-    radial-gradient(34% 34% at 24% 32%, hsla(214, 80%, 70%, 0.95), hsla(214, 80%, 70%, 0) 72%),
-    radial-gradient(30% 30% at 68% 22%, hsla(268, 76%, 74%, 0.92), hsla(268, 76%, 74%, 0) 72%),
-    radial-gradient(32% 32% at 78% 70%, hsla(158, 62%, 74%, 0.90), hsla(158, 62%, 74%, 0) 72%),
-    radial-gradient(30% 30% at 28% 76%, hsla(326, 80%, 76%, 0.90), hsla(326, 80%, 76%, 0) 72%),
-    radial-gradient(26% 26% at 52% 50%, hsla(196, 50%, 94%, 0.88), hsla(196, 50%, 94%, 0) 72%);
+    radial-gradient(34% 34% at 24% 32%, hsla(16, 74%, 70%, 0.95), hsla(16, 74%, 70%, 0) 72%),
+    radial-gradient(30% 30% at 68% 22%, hsla(26, 68%, 74%, 0.92), hsla(26, 68%, 74%, 0) 72%),
+    radial-gradient(32% 32% at 78% 70%, hsla(4, 62%, 75%, 0.90), hsla(4, 62%, 75%, 0) 72%),
+    radial-gradient(30% 30% at 28% 76%, hsla(20, 70%, 76%, 0.90), hsla(20, 70%, 76%, 0) 72%),
+    radial-gradient(26% 26% at 52% 50%, hsla(22, 44%, 93%, 0.88), hsla(22, 44%, 93%, 0) 72%);
   animation: btn-mesh 26s linear infinite;
 }
 @keyframes btn-mesh {
@@ -2013,7 +2013,7 @@ img.mod__cover {
 /* o verso é a mesma malha viva do painel do topo: um <canvas> por carta, cada
    um com o seu deslocamento de matiz, para as três nunca ficarem iguais */
 .pcard__back {
-  background: #F2F5FF;
+  background: #F2EDE2;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
   color: #12100F;
 }

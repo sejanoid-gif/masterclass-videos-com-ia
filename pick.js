@@ -47,8 +47,13 @@
   /* O verso de cada carta é a mesma malha viva do painel do topo, com um
      deslocamento de matiz por carta para as três nunca ficarem iguais. O
      is-live vem antes daqui de propósito: sem largura medida o canvas nasce
-     de 1px. */
-  var TINTS = [0, -54, 98];
+     de 1px.
+
+     Os deslocamentos eram -54 e +98: com a malha na série quente, +98 jogaria
+     a terceira carta em verde outra vez. Encolhidos, as três continuam
+     distintas — escarlate, terracota, mostarda —, e as três continuam da
+     mesma família. */
+  var TINTS = [0, -18, 10];
   var meshes = [];
   if (window.Mesh) {
     cards.forEach(function (card, i) {
@@ -133,8 +138,13 @@
 
   /* ── o confete ──────────────────────────────────────────────────────────
      Sai do meio da carta escolhida, num leque para cima, e cai. */
+  /* Quatro cores da marca e quatro da malha. As quatro da malha eram o
+     arco-íris (214, 268, 158, 326) e voltavam em azul e verde justo no
+     instante mais visto da página. Trocadas pela série quente, a variedade
+     que o confete precisa vem da LUZ, não da matiz: terracota, mostarda,
+     escarlate fundo e pêssego claro. */
   var COLORS = ['#C6674B', '#D8825F', '#EBE4D4', '#F2C6B4',
-                'hsl(214,80%,70%)', 'hsl(268,76%,74%)', 'hsl(158,62%,74%)', 'hsl(326,80%,76%)'];
+                'hsl(16,74%,70%)', 'hsl(38,72%,64%)', 'hsl(4,58%,52%)', 'hsl(26,68%,80%)'];
 
   function burst(card) {
     var box = card.getBoundingClientRect();

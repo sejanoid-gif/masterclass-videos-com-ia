@@ -20,14 +20,27 @@
   }
 
   /* Each blob carries its own drift path and its own hue speed, so the
-     composite never repeats on a visible cycle. */
+     composite never repeats on a visible cycle.
+
+     As matizes são a série quente da marca, não o arco-íris de antes: 16 é o
+     terracota (#C6674B é matiz 14), 26 o laranja, 4 o escarlate, 20 o meio do
+     caminho e 22 o brilho de creme. Caminho, velocidade, raio e fase ficam
+     iguais — o que muda é de onde a cor sai. */
   var BLOBS = [
-    { r: 0.92, hue: 214, hs: 5.5,  ax: 0.30, ay: 0.22, fx: 0.07,  fy: 0.05,  ph: 0.0, s: 74, l: 62, a: 0.95 },
-    { r: 0.78, hue: 268, hs: 7.0,  ax: 0.26, ay: 0.26, fx: 0.053, fy: 0.081, ph: 1.7, s: 70, l: 66, a: 0.80 },
-    { r: 0.70, hue: 158, hs: 6.0,  ax: 0.32, ay: 0.20, fx: 0.091, fy: 0.062, ph: 3.1, s: 58, l: 70, a: 0.70 },
-    { r: 0.62, hue: 326, hs: 8.5,  ax: 0.24, ay: 0.28, fx: 0.067, fy: 0.099, ph: 4.4, s: 72, l: 68, a: 0.62 },
-    { r: 0.50, hue: 196, hs: 4.5,  ax: 0.20, ay: 0.18, fx: 0.117, fy: 0.073, ph: 5.6, s: 40, l: 92, a: 0.85 }
+    { r: 0.92, hue: 16, hs: 5.5,  ax: 0.30, ay: 0.22, fx: 0.07,  fy: 0.05,  ph: 0.0, s: 70, l: 64, a: 0.95 },
+    { r: 0.78, hue: 26, hs: 7.0,  ax: 0.26, ay: 0.26, fx: 0.053, fy: 0.081, ph: 1.7, s: 64, l: 68, a: 0.80 },
+    { r: 0.70, hue: 4,  hs: 6.0,  ax: 0.32, ay: 0.20, fx: 0.091, fy: 0.062, ph: 3.1, s: 58, l: 70, a: 0.70 },
+    { r: 0.62, hue: 20, hs: 8.5,  ax: 0.24, ay: 0.28, fx: 0.067, fy: 0.099, ph: 4.4, s: 66, l: 69, a: 0.62 },
+    { r: 0.50, hue: 22, hs: 4.5,  ax: 0.20, ay: 0.18, fx: 0.117, fy: 0.073, ph: 5.6, s: 34, l: 93, a: 0.85 }
   ];
+
+  /* De quanto cada bolha gira a matiz enquanto anda. Era 46: com o arco-íris
+     isso não importava, porque tudo já era longe de tudo. Numa família de uma
+     cor só, 46 jogaria o laranja em verde-limão de um lado e em magenta do
+     outro — ou seja, desfaria a família a cada ciclo. Com 12, somado aos
+     tints, o conjunto passeia entre 336 e 50: rosa, escarlate, terracota,
+     laranja, mostarda. Todas da série. */
+  var GIRO = 12;
 
   function start(canvas, opts) {
     opts = opts || {};
@@ -54,7 +67,9 @@
       offset += (target - offset) * 0.035;
 
       // the ground the blobs sit on: near-white, faintly warm at the top
-      ctx.fillStyle = '#F2F5FF';
+      // (o papel da marca, #F2EDE2 — era #F2F5FF, um branco puxado para azul,
+      //  e como as bolhas entram em multiply ele tingia o conjunto inteiro)
+      ctx.fillStyle = '#F2EDE2';
       ctx.fillRect(0, 0, w, h);
 
       ctx.globalCompositeOperation = 'multiply';
@@ -63,7 +78,7 @@
         var cx = w * (0.5 + b.ax * Math.sin(s * b.fx + b.ph));
         var cy = h * (0.5 + b.ay * Math.cos(s * b.fy * 1.31 + b.ph));
         var rad = d * b.r;
-        var hue = b.hue + offset + Math.sin(s * b.hs * 0.02 + b.ph) * 46;
+        var hue = b.hue + offset + Math.sin(s * b.hs * 0.02 + b.ph) * GIRO;
         var g = ctx.createRadialGradient(cx, cy, 0, cx, cy, rad);
         g.addColorStop(0, hsl(hue, b.s, b.l, b.a));
         g.addColorStop(0.45, hsl(hue + 14, b.s, b.l + 8, b.a * 0.45));
