@@ -112,10 +112,12 @@ use { pointer-events: none; }
    legible over anything that scrolls beneath them. */
 .nav::before {
   content: ""; position: absolute; z-index: -1; left: 0; right: 0; top: -42px; height: 204px;
-  background: linear-gradient(#000 0%, #000 2%, rgba(0, 0, 0, 0.98) 10%, rgba(0, 0, 0, 0.918) 20.4%,
-    rgba(0, 0, 0, 0.835) 28.6%, rgba(0, 0, 0, 0.698) 38.8%, rgba(0, 0, 0, 0.52) 49%,
-    rgba(0, 0, 0, 0.333) 59.2%, rgba(0, 0, 0, 0.19) 69.4%, rgba(0, 0, 0, 0.082) 79.6%,
-    rgba(0, 0, 0, 0.02) 89.8%, rgba(0, 0, 0, 0) 98%);
+  /* o véu da barra acompanha o chão: preto puro aqui vira uma faixa fria
+     por cima de um céu quente */
+  background: linear-gradient(#14120F 0%, #14120F 2%, rgba(20, 18, 15, 0.98) 10%, rgba(20, 18, 15, 0.918) 20.4%,
+    rgba(20, 18, 15, 0.835) 28.6%, rgba(20, 18, 15, 0.698) 38.8%, rgba(20, 18, 15, 0.52) 49%,
+    rgba(20, 18, 15, 0.333) 59.2%, rgba(20, 18, 15, 0.19) 69.4%, rgba(20, 18, 15, 0.082) 79.6%,
+    rgba(20, 18, 15, 0.02) 89.8%, rgba(20, 18, 15, 0) 98%);
   pointer-events: none;
 }
 .nav__bar {
@@ -1147,7 +1149,7 @@ a.preview__cta:hover { background: #fff; }
 .close {
   position: relative; overflow: hidden;
   height: 910px;
-  background: linear-gradient(#000000 0%, var(--char) 100%);
+  background: linear-gradient(#14120F 0%, var(--char) 100%);
 }
 .close__shell { position: relative; z-index: 3; padding-top: 180px; }
 .close__copy { width: 344px; }
@@ -1175,7 +1177,7 @@ a.preview__cta:hover { background: #fff; }
 }
 
 /* ══════════════════════════════════════════════════════════ footer ══════ */
-.foot { background: #000; }
+.foot { background: #14120F; }   /* era #000: o rodapé é a mesma superfície do chão */
 .foot__grid {
   display: grid; grid-template-columns: 1fr auto;
   padding-top: 64px; height: 460px;
@@ -1655,6 +1657,31 @@ a.preview__cta:hover { background: #fff; }
   --brand-soft: rgba(198, 103, 75, 0.22);
   --rose:       #C6674B;   /* o degradê do topo termina na cor do curso */
   --ui-blue:    #C6674B;   /* as telas do produto usam a cor da marca */
+}
+
+/* ══════════════════════════ o chão: tirar o azul, aquecer o preto ══════
+   O degradê do topo saía de #1B2228 (matiz 208) e passava por #353F44
+   (matiz 200) antes de virar terracota. Azul de verdade não era: a
+   saturação dos dois é 13 e 15, contra 123 do terracota. Frio demais para
+   ser neutro, fraco demais para ser cor — ao lado do laranja lia como
+   sujeira, não como céu.
+   As duas paradas passam a ser o chão NOITE da marca, na mesma luminância
+   de antes (30 e 60, contra 33 e 60), com a matiz atravessada para o lado
+   quente (40). O céu continua sendo céu: só amanhece em vez de entardecer.
+   Assim o azul da série (#5B7FA6) fica livre para o cargo que ele tem na
+   marca — acento, um elemento por tela, nunca superfície.
+   O preto também sai: #000000 é neutro, e neutro endurece terracota. */
+:root {
+  --char:  #221E18;   /* era #1B2228 — o chão noite da marca */
+  --slate: #423C31;   /* era #353F44 — noite, clareado até a luminância antiga */
+
+  --sc-canvas:     #14120F;                  /* era #000000 */
+  --sc-accent-ink: #23201A;                  /* era #000000: a tinta da marca, não preto puro */
+  --fill-card:     rgba(20, 18, 15, 0.85);   /* era rgba(15, 15, 15, …) */
+  --fill-raise:    rgba(34, 30, 24, 0.85);   /* era rgba(23, 23, 23, …) */
+
+  /* a profundidade era azul: matiz 220 em TODA sombra da página */
+  --sc-shadow-color: 20 40% 2%;
 }
 .pill i, .label i { background: var(--brand); }
 .tab__bar i { background: linear-gradient(90deg, rgba(198, 103, 75, 0), var(--brand)); }
